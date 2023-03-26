@@ -12,6 +12,11 @@ const config = {
       parserOptions: {
         project: path.join(__dirname, "tsconfig.json"),
       },
+      rules: {
+        // "@typescript-eslint/no-unsafe-call": "off",
+        // "@typescript-eslint/no-unsafe-assignment": "off",
+        // "@typescript-eslint/no-unsafe-member-access": "off"
+      }
     },
   ],
   parser: "@typescript-eslint/parser",
@@ -29,7 +34,9 @@ const config = {
       },
     ],
     "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
-    "indent": ["error", 2]
+    "indent": ["error", 2],
+    // "@typescript-eslint/no-unsafe-call": "off",
+    // "@typescript-eslint/no-unsafe-assignment": "off"
   },
 };
 

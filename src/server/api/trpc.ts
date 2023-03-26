@@ -14,10 +14,9 @@
  *
  * These allow you to access things when processing a request, like the database, the session, etc.
  */
-import { type CreateNextContextOptions } from "@trpc/server/adapters/next";
-import { type Session } from "next-auth";
+import type { CreateNextContextOptions } from "@trpc/server/adapters/next";
+import type { Session } from "@auth0/nextjs-auth0"
 
-import { getServerAuthSession } from "@/server/auth";
 import { prisma } from "@/server/db";
 
 type CreateContextOptions = {
@@ -51,10 +50,11 @@ export const createTRPCContext = async (opts: CreateNextContextOptions) => {
   const { req, res } = opts;
 
   // Get the session from the server using the getServerSession wrapper function
-  const session = await getServerAuthSession({ req, res });
+  const session = await getSession(req, res);
+
 
   return createInnerTRPCContext({
-    session,
+    session: session || null,
   });
 };
 
@@ -68,6 +68,7 @@ export const createTRPCContext = async (opts: CreateNextContextOptions) => {
 import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
+import { getSession } from "@auth0/nextjs-auth0";
 
 const t = initTRPC.context<typeof createTRPCContext>().create({
   transformer: superjson,
