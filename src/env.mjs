@@ -13,7 +13,7 @@ const server = z.object({
   AUTH0_CLIENT_ID: z.string().min(1),
   AUTH0_CLIENT_SECRET: z.string().min(1),
   AUTH0_SECRET: z.string().min(32),
-  AUTH0_BASE_URL: z.string().url(),
+  AUTH0_BASE_URL: z.string().min(1),
 });
 
 /**
