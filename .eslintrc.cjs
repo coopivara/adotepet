@@ -29,7 +29,8 @@ const config = {
       },
     ],
     "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
-    "indent": ["error", 2]
+    "indent": ["error", 2],
+    "@typescript-eslint/no-unsafe-call": "off",
   },
 };
 
