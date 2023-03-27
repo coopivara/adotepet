@@ -14,12 +14,28 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-model Organization {
-    id          String   @id @default(uuid())
-    name        String
-    description String
-    createdAt   DateTime @default(now())
-    updatedAt   DateTime @updatedAt
+model Ong {
+    id String @id @default(uuid())
+    animals Animal[]
+    name String @unique
+    owner_name String
+    phone String
+    whatsapp Boolean 
+    email Boolean
+    createdAt DateTime @default(now())
+    @@map("ongs")
+}
 
-    @@map("organizations")
+model Animal {
+    id String @id @default(uuid())
+    ong   Ong @relation(fields: [ong_name], references: [name], onDelete: Cascade)
+    ong_name String
+    species String
+    felv Boolean
+    breed String
+    sex Boolean
+    disabled Boolean
+    age Int
+    neutered Boolean
+    @@map("animal")
 }
